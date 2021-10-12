@@ -1,6 +1,10 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
   <script src="skulpt-dist-master/skulpt.min.js" type="text/javascript"></script>
   <script src="skulpt-dist-master/skulpt-stdlib.js" type="text/javascript"></script>
@@ -22,123 +26,135 @@
   <title>Python</title>
 </head>
 
-<body class="bg-white">
-  <div class="m-5">
+<body class="bg-secondary">
+  <!-- <div class="m-5">
     <div class="d-flex justify-content-center">
-      <h1>Python</h1>
+      <h1 class="text-dark">Python</h1>
     </div>
-    <!-- <div class="custom-control custom-switch text-center my-3">
+    <div class="custom-control custom-switch text-center my-3">
       <input type="checkbox" class="custom-control-input" id="darkSwitch">
       <label class="custom-control-label" for="darkSwitch">Dark Mode</label>
-    </div> -->
-
-  </div>
-  <div id="container" class="my-1 mx-1 light"></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.26.1/min/vs/loader.min.js"></script>
-  <script>
-    // require is provided by loader.min.js.
-    require.config({
-      paths: {
-        vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.26.1/min/vs",
-      },
-    });
-    require(["vs/editor/editor.main"], () => {
-      window.editor = monaco.editor.create(document.getElementById("container"), {
-        value: `print('Hello World')`,
-        language: "python",
-        theme: "vs-dark",
-      });
-    });
-  </script>
-
-
-  <script type="text/javascript">
-    // output functions are configurable.  This one just appends some text
-    // to a pre element.
-    function outf(text) {
-      var mypre = document.getElementById("output");
-      mypre.innerHTML = mypre.innerHTML + text;
-      mypre.style.color = "white";
-    }
-    function builtinRead(x) {
-      if (
-        Sk.builtinFiles === undefined ||
-        Sk.builtinFiles["files"][x] === undefined
-      )
-        throw "File not found: '" + x + "'";
-      return Sk.builtinFiles["files"][x];
-    }
-
-    // Here's everything you need to run a python program in skulpt
-    // grab the code from your textarea
-    // get a reference to your pre element for output
-    // configure the output function
-    // call Sk.importMainWithBody()
-    function runit() {
-      console.log(window.editor.getValue())
-      // var prog = document.getElementById("yourcode").value;
-      var prog = window.editor.getValue()
-      var mypre = document.getElementById("output");
-      mypre.innerHTML = "";
-      Sk.pre = "output";
-      Sk.configure({ output: outf, read: builtinRead });
-      (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = "mycanvas";
-      var myPromise = Sk.misceval.asyncToPromise(function () {
-        return Sk.importMainWithBody("<stdin>", false, prog, true);
-      });
-      var error = document.getElementById("error");
-      myPromise.then(
-        function (mod) {
-          console.log("success");
-        },
-        function (err) {
-          console.log(err.toString());
-          error.innerHTML = err.toString();
-          error.style.color = "white";
-        }
-        );
-        error.innerText = "";
-    }
-
-  </script>
-  <script src="dark-mode-switch.min.js"></script>
-
-  <div class="row my-1">
-    <div class="col-md-12">
-      <button type="button" class="btn btn-primary btn-lg" onclick="runit()">Run</button>
-      <button type="button" class="btn btn-primary btn-lg">Save On Cloud</button>
     </div>
-  </div>
 
-  </form>
-  <!-- <pre id="output" class="light my-1 mx-1 bg-dark"></pre> -->
+  </div> -->
+  <div class="box">
+    <div class="row mx-4">
+      <div class="col-6">
+        <div id="container" class="light"></div>
+      </div>
+      <div class="col-6 my-4">
+        <!-- <h1 class="text-dark text-center">output</h1> -->
+        <pre id="output" class="light" style="background-color: #1f1f20;"></pre>
+        <div id="mycanvas"></div>
+      </div>
+    </div>
   
-  <div class="row mx-1 my-1">
-    <div class="col-6 ">
-      <h1>output</h1>
-      <pre id="output" class="light bg-dark"></pre>
-      <div id="mycanvas"></div>
+    <div class="row my-2">
+      <div class="col-md-12 text-center">
+        <button type="button" class="btn btn-warning btn-lg" onclick="runit()">Run</button>
+        <button type="button" class="btn btn-warning btn-lg">Save On Cloud</button>
+      </div>
     </div>
-    <div class="col-6">
-      <h1>error</h1>
-      <div id="error" class="light bg-dark"></div>
+  
+    </form>
+  
+    <div class="row mx-3 my-1">
+      <!-- <div class="col-6">
+        <h1 class="text-dark text-center">output</h1>
+        <pre id="output" class="light" style="background-color: #222425;"></pre>
+        <div id="mycanvas"></div>
+      </div> -->
+      <div class="col mx-4">
+        <h1 class="text-dark text-center">error</h1>
+        <div id="error" style="background-color: #1f1f20;height: 200px;"></div>
+      </div>
     </div>
   </div>
+
 </body>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.26.1/min/vs/loader.min.js"></script>
+<script>
+  // require is provided by loader.min.js.
+  require.config({
+    paths: {
+      vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.26.1/min/vs",
+    },
+  });
+  require(["vs/editor/editor.main"], () => {
+    window.editor = monaco.editor.create(document.getElementById("container"), {
+      value: `print('Hello World')`,
+      language: "python",
+      theme: "vs-dark",
+    });
+  });
+</script>
+
+
+<script type="text/javascript">
+  // output functions are configurable.  This one just appends some text
+  // to a pre element.
+  function outf(text) {
+    var mypre = document.getElementById("output");
+    mypre.innerHTML = mypre.innerHTML + text;
+    mypre.style.color = "white";
+  }
+  function builtinRead(x) {
+    if (
+      Sk.builtinFiles === undefined ||
+      Sk.builtinFiles["files"][x] === undefined
+    )
+      throw "File not found: '" + x + "'";
+    return Sk.builtinFiles["files"][x];
+  }
+
+  // Here's everything you need to run a python program in skulpt
+  // grab the code from your textarea
+  // get a reference to your pre element for output
+  // configure the output function
+  // call Sk.importMainWithBody()
+  function runit() {
+    console.log(window.editor.getValue())
+    // var prog = document.getElementById("yourcode").value;
+    var prog = window.editor.getValue()
+    var mypre = document.getElementById("output");
+    mypre.innerHTML = "";
+    Sk.pre = "output";
+    Sk.configure({ output: outf, read: builtinRead });
+    (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = "mycanvas";
+    var myPromise = Sk.misceval.asyncToPromise(function () {
+      return Sk.importMainWithBody("<stdin>", false, prog, true);
+    });
+    var error = document.getElementById("error");
+    myPromise.then(
+      function (mod) {
+        console.log("success");
+      },
+      function (err) {
+        console.log(err.toString());
+        error.innerHTML = err.toString();
+        error.style.color = "white";
+      }
+    );
+    error.innerText = "";
+  }
+
+</script>
+<script src="dark-mode-switch.min.js"></script>
+
 <style>
-  .box {
-    top: 50%;
-    left: 50%;
+
+  .light {
+    height: 385px;
+    padding: 25px;
+  }
+  box {
+    top: 100%;
+    left: 100%;
     transform: translateX(-50%)translateY(-50%);
     position: absolute;
     margin: 0;
     padding: 0;
-  }
-
-  .light {
-    height: 400px;
-    border: 1px solid black;
   }
 </style>
 
