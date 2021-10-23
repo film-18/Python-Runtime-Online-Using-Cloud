@@ -11,6 +11,26 @@ function signOut() {
     console.log("Name: " + profile.getName());
     console.log("Image URL: " + profile.getImageUrl());
     console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
+    console.log(googleUser);
+    var showProfile = document.getElementById("profile")
+
+    let textbox = document.createElement("div");
+    textbox.innerText = profile.getEmail();
+    // textbox.setAttribute("class", "text-gray-900");
+    // textbox.setAttribute("class", "leading-none");
+
+    let box = document.createElement("div");
+    box.setAttribute("class", "mx-auto grid grid-cols-2");
+
+    
+    var image = document.createElement("IMG");
+    image.setAttribute("src", profile.getImageUrl());
+    image.setAttribute("class", "h-10 w-10 rounded-full");
+   
+    box.appendChild(image);
+    box.appendChild(textbox);
+    showProfile.append(box);
+    
   }
 
   function onFailure(error) {
