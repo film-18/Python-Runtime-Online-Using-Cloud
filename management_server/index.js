@@ -24,11 +24,7 @@ const ddb = new dynamoose.aws.sdk.DynamoDB({
 dynamoose.aws.ddb.set(ddb);
 
 const ComputeHistory = dynamoose.model("History", {
-    id: {
-        type: String,
-        hashKey: true,
-        default: uuid.v4().toString()
-    },
+    id: String,
     "time": Number,
     "code": String,
 });
@@ -68,10 +64,12 @@ app.post('/', async (req, res) => {
 
         try {
             await ComputeHistory.create({
+                id: uuid.v4().toString(),
                 time: Date.now().valueOf(),
                 code: programCode
             })
         } catch (error) {
+            console.log("error with database....")
             console.error(error);
         }
 
@@ -111,7 +109,7 @@ app.post('/', async (req, res) => {
         fs.rmSync(`./codes/${fileName}`)
         ssh.execCommand(`rm ${fileName}`)
 
-        ssh.dispose()
+        // ssh.dispose()
     }
     catch (e) {
         console.log(e)
