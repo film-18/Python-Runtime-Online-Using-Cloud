@@ -36,6 +36,7 @@ exports.getEc2Count = async (onlyRunning = true) => {
 
     let all_ec2 = data.Reservations.map(e => e.Instances[0])
 
+    
     return {
         ec2Counts: ec2_count,
         ec2s: all_ec2

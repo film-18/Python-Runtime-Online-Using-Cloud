@@ -14,7 +14,7 @@ var instanceParams = {
    MinCount: 1,
    MaxCount: 1,
    SecurityGroupIds: ['sg-0605c5dfd18094dde'],
-   SubnetId: 'subnet-0deaf653b2c6ca5dc'
+   SubnetId: 'subnet-0633680c2811abb66'  //private1
 };
 
 exports.createEc2 = async () => {

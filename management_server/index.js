@@ -101,10 +101,10 @@ app.post('/', async (req, res) => {
 
         let usingEC2Index = Math.floor(Math.random() * ec2.ec2Counts); // random ec2 for use to run code :) change to roundrobin tomorrow XD
         let usingEC2 = ec2.ec2s[usingEC2Index];
-        console.log("using => %s - %s", usingEC2.InstanceId, usingEC2.PublicIpAddress)
+        console.log("using => %s - %s", usingEC2.InstanceId, usingEC2.PrivateIpAddress)
 
         await ssh.connect({
-            host: usingEC2.PublicIpAddress,
+            host: usingEC2.PrivateIpAddress,
             username: 'ec2-user',
             privateKey: fs.readFileSync('./keypair/python_key2.pem', 'utf-8'),
         })
