@@ -33,13 +33,13 @@ const s3 = new AWS.S3({
     "Bucket": "my-bucket-film"
 });
 
-const ComputeHistory = dynamoose.model("History", {
+const ComputeHistory = dynamoose.model("g4_History", {
     id: String,
     "time": Number,
     "code": String,
 });
 
-const NodeData = dynamoose.model("Node", {
+const NodeData = dynamoose.model("g4_Node", {
     id: String,
     value: String,
 });
