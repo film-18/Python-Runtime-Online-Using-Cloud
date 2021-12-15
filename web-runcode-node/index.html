@@ -93,7 +93,7 @@
     location.search.substr(1).split("&").forEach(function(item) {queryDict[item.split("=")[0]] = item.split("=")[1]})
 
     if(queryDict['s3']) {
-      axios.get(`http://localhost:8080/share?s3=${queryDict['s3']}`).then((res) => {
+      axios.get(`http://g4-webbackend-asg-1-2068798401.us-east-1.elb.amazonaws.com:8080/share?s3=${queryDict['s3']}`).then((res) => {
         window.editor.setValue(res.data)
         console.log(res.data)
       })
@@ -120,7 +120,7 @@
 
   function share() {
     var prog = window.editor.getValue()
-    axios.post("http://localhost:8080/share", {
+    axios.post("http://g4-webbackend-asg-1-2068798401.us-east-1.elb.amazonaws.com:8080/share", {
       code: prog
     }).then(res => {
       console.log(res.data.sharelink)
@@ -134,7 +134,7 @@
     var prog = window.editor.getValue()
     var mypre = document.getElementById("output");
     mypre.innerHTML = "";
-    axios.post("http://localhost:8080/", {
+    axios.post("http://g4-webbackend-asg-1-2068798401.us-east-1.elb.amazonaws.com:8080/", {
       code: prog
     }).then(res => {
       console.log(res.data.output)

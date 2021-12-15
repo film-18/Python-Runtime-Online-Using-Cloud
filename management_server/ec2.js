@@ -13,7 +13,7 @@ var instanceParams = {
    KeyName: 'python_key2',
    MinCount: 1,
    MaxCount: 1,
-   SecurityGroupIds: ['sg-0605c5dfd18094dde'],
+   SecurityGroupIds: ['sg-08328f5ec151fab4f'],
    SubnetId: 'subnet-0bed954bf5f435f2b'  //private1
 };
 
