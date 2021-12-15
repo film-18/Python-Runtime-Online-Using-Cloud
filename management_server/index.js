@@ -106,7 +106,7 @@ app.post('/', async (req, res) => {
         await ssh.connect({
             host: usingEC2.PrivateIpAddress,
             username: 'ec2-user',
-            privateKey: fs.readFileSync('./keypair/python_key2.pem', 'utf-8'),
+            privateKey: fs.readFileSync('./keypair/G4-pythonKey.pem', 'utf-8'),
         })
 
         await ssh.putFile(`./codes/${fileName}`, `${fileName}`);
