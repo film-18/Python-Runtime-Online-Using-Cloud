@@ -209,7 +209,7 @@ cron.schedule('*/25 * * * * *', async() => {
 
     // console.log((await NodeData.get('master_node')).original().value, thisNode)
 
-    if((await NodeData.get('master_node')).original().value === thisNode) {
+    if((await NodeData.get('master_node'))?.original().value === thisNode) {
         NodeData.update({
             id: "last_response",
             value: Date.now().valueOf().toString()
@@ -219,7 +219,7 @@ cron.schedule('*/25 * * * * *', async() => {
     else {
         // take over master node
         // console.log((await NodeData.get("last_response")).original().value)
-        let last_response = parseInt((await NodeData.get("last_response")).original().value);
+        let last_response = parseInt((await NodeData.get("last_response"))?.original().value) || 0;
 
         // console.log(last_response)
 
@@ -249,7 +249,7 @@ cron.schedule('* * * * *', async () => {
 
     try {
         // check dynamo for master node if self is maternode then do a job
-        if((await NodeData.get('master_node')).original().value === thisNode) {
+        if((await NodeData.get('master_node'))?.original().value === thisNode) {
 
             console.log("working on scaling....")
 
