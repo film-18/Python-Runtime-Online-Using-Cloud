@@ -10,7 +10,7 @@ var ec2 = new AWS.EC2({apiVersion: '2016-11-15'});
 var instanceParams = {
    ImageId: 'ami-0ed9277fb7eb570c9', 
    InstanceType: 't2.micro',
-   KeyName: 'python_key2',
+   KeyName: 'G4-pythonKey',
    MinCount: 1,
    MaxCount: 1,
    SecurityGroupIds: ['sg-08328f5ec151fab4f'],
