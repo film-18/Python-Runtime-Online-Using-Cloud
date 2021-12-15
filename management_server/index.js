@@ -147,6 +147,12 @@ app.get('/share/', (req, res) => {
     
 })
 
+app.get('/status', (req, res) => {
+    res.send({
+        "ho": "hohoho"
+    })
+})
+
 app.post('/share', async (req, res) => {
     
     //   const s3download = function (params) {
