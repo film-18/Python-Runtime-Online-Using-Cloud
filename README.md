@@ -13,7 +13,7 @@ Python Runtime Online เป็น website สำหรับ run Code ภาษ
 
 # Video Present : 
 https://youtu.be/OB_9Wbp2IlM
-[![video present](https://imgur.com/OETx7LZ)](https://youtu.be/OB_9Wbp2IlM)
+[Imgur](https://i.imgur.com/OETx7LZ.jpg)
 
 
 # AWS
